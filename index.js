@@ -1,55 +1,47 @@
 import puppeteer from 'puppeteer'
 import fs from 'fs'
 
-const getinfo = async () => {
-  const browser = await puppeteer.launch({
-    headless: false,
-    defaultViewport: null,
-  })
+const browser = await puppeteer.launch({
+  headless: false,
+  defaultViewport: null,
+})
 
-  try {
-    const page = await browser.newPage()
-    await page.goto('https://app.optimism.io/retropgf-discovery', {
-      waitUntil: 'domcontentloaded',
-    })
-
-    await page.waitForTimeout(15000)
-    const data = await page.evaluate(() => {
-      const card = document.querySelectorAll('._container_1dvyk_1')
-      return Array.from(card).map((item) => {
-        const name = item.querySelector('h3').innerText
-        const description = item.querySelector('p').innerText
-        const category = item.querySelector('button>span').innerText
-        const icon64 = item.querySelector('img').src
-        const icon = Buffer.from(icon64.slice(22), 'base64')
-        const banner64 = item.querySelector('._banner_1dvyk_15 > img').src
-        const banner = Buffer.from(banner64.slice(22), 'base64')
-        const pathsaveicon = `${name}_icon.png`
-        const pathsavebanner = `${name}_banner.png`
-        fs.writeFileSync(pathsaveicon, icon, 'binary')
-        fs.writeFileSync(pathsavebanner, banner, 'binary')
-
-        return { name, description, category, icon, banner }
-      })
-    })
-    let buttonclicked = true
-    while (buttonclicked) {
-      try {
-        await page.$eval('._primaryButton_7jap0_6', (button) => button.click())
-        await page.waitForTimeout(6000)
-      } catch (error) {
-        buttonclicked = false
-      }
+try {
+  const page = await browser.newPage()
+  await page.goto('https://app.optimism.io/retropgf-discovery')
+  await page.waitForSelector('._primaryButton_7jap0_6')
+  while (true) {
+    try {
+      await page.$eval('._primaryButton_7jap0_6', (button) => button.click())
+      await page.waitForSelector('._primaryButton_7jap0_6', { timeout: 10000 })
+    } catch (error) {
+      break
     }
-    // await page.click('._primaryButton_7jap0_6');
-    fs.writeFileSync('Test2xx.json', JSON.stringify(data))
-    console.log(data)
-  } catch (error) {
-    console.error('An error occurred:', error)
-  } finally {
-    console.log('Done Scraping')
-    await browser.close()
   }
+  const cards = await page.$$('._container_1dvyk_1')
+  for (const card of cards) {
+    const name = await card.$eval('h3', (h3) => h3.innerText)
+    const description = await card.$eval('p', (p) => p.innerText)
+    const category = await card.$eval('button>span', (span) => span.innerText)
+    const cleanName = name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+    fs.mkdirSync(`out/${cleanName}`, { recursive: true })
+    fs.writeFileSync(
+      `out/${cleanName}/info.json`,
+      JSON.stringify({ name, description, category })
+    )
+    const icon64 = await card.$eval('._logo_1dvyk_63', (img) => img.src)
+    const banner64 = await card.$eval(
+      '._banner_1dvyk_15 > img',
+      (img) => img.src
+    )
+    const icon = Buffer.from(icon64.slice(22), 'base64')
+    const banner = Buffer.from(banner64.slice(22), 'base64')
+    fs.writeFileSync(`out/${cleanName}/icon.jpg`, icon, 'binary')
+    fs.writeFileSync(`out/${cleanName}/banner.jpg`, banner, 'binary')
+  }
+} catch (error) {
+  console.error('An error occurred:' + error)
+} finally {
+  console.log('Done Scraping')
+  await browser.close()
 }
-
-getinfo()
