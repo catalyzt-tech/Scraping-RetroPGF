@@ -1,5 +1,6 @@
-const puppeteer = require('puppeteer')
-const fs = require('fs')
+import puppeteer from 'puppeteer'
+import fs from 'fs'
+
 const getinfo = async () => {
   const browser = await puppeteer.launch({
     headless: false,
@@ -12,42 +13,41 @@ const getinfo = async () => {
       waitUntil: 'domcontentloaded',
     })
 
-    await page.waitForTimeout(100000)
+    await page.waitForTimeout(15000)
     const data = await page.evaluate(() => {
       const card = document.querySelectorAll('._container_1dvyk_1')
-
       return Array.from(card).map((item) => {
         const name = item.querySelector('h3').innerText
         const description = item.querySelector('p').innerText
         const category = item.querySelector('button>span').innerText
-        // const x = item
-        //   .querySelector('img')
-        //   .src.replace(/^data:image\/png;base64,/, '')
-        // const y = item
-        //   .querySelector('_banner_1dvyk_15 > img')
-        //   .src.replace(/^data:image\/png;base64,/, '')
+        const icon64 = item.querySelector('img').src
+        const icon = Buffer.from(icon64.slice(22), 'base64')
+        const banner64 = item.querySelector('._banner_1dvyk_15 > img').src
+        const banner = Buffer.from(banner64.slice(22), 'base64')
+        const pathsaveicon = `${name}_icon.png`
+        const pathsavebanner = `${name}_banner.png`
+        fs.writeFileSync(pathsaveicon, icon, 'binary')
+        fs.writeFileSync(pathsavebanner, banner, 'binary')
 
-        const iconElement = item.querySelector('img')
-        const bannerElement = item.querySelector('_banner_1dvyk_15 > img')
-
-        const x = iconElement
-          ? iconElement.src.replace(/^data:image\/png;base64,/, '')
-          : ''
-        const y = bannerElement
-          ? bannerElement.src.replace(/^data:image\/png;base64,/, '')
-          : ''
-
-        const icon = Buffer.from(x, 'base64')
-        const banner = Buffer.from(y, 'base64')
         return { name, description, category, icon, banner }
       })
     })
-    // await page.click('._primaryButton_7jap0_6')
-    fs.writeFileSync('ListOfRetroPFG2.json', JSON.stringify(data))
+    let buttonclicked = true
+    while (buttonclicked) {
+      try {
+        await page.$eval('._primaryButton_7jap0_6', (button) => button.click())
+        await page.waitForTimeout(6000)
+      } catch (error) {
+        buttonclicked = false
+      }
+    }
+    // await page.click('._primaryButton_7jap0_6');
+    fs.writeFileSync('Test2xx.json', JSON.stringify(data))
     console.log(data)
   } catch (error) {
     console.error('An error occurred:', error)
   } finally {
+    console.log('Done Scraping')
     await browser.close()
   }
 }
