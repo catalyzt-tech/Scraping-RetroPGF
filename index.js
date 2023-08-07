@@ -18,6 +18,7 @@ try {
       break
     }
   }
+  page.waitForTimeout(500000)
   const cards = await page.$$('._container_1dvyk_1')
   for (const List of cards) {
     const name = await List.$eval('h3', (h3) => h3.innerText)
