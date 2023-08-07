@@ -19,18 +19,19 @@ try {
     }
   }
   const cards = await page.$$('._container_1dvyk_1')
-  for (const card of cards) {
-    const name = await card.$eval('h3', (h3) => h3.innerText)
-    const description = await card.$eval('p', (p) => p.innerText)
-    const category = await card.$eval('button>span', (span) => span.innerText)
-    const cleanName = name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+  for (const List of cards) {
+    const name = await List.$eval('h3', (h3) => h3.innerText)
+    const description = await List.$eval('p', (p) => p.innerText)
+    const category = await List.$eval('button>span', (span) => span.innerText)
+    // const cleanName = name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+    const cleanName = name
     fs.mkdirSync(`out/${cleanName}`, { recursive: true })
     fs.writeFileSync(
       `out/${cleanName}/info.json`,
       JSON.stringify({ name, description, category })
     )
-    const icon64 = await card.$eval('._logo_1dvyk_63', (img) => img.src)
-    const banner64 = await card.$eval(
+    const icon64 = await List.$eval('._logo_1dvyk_63', (img) => img.src)
+    const banner64 = await List.$eval(
       '._banner_1dvyk_15 > img',
       (img) => img.src
     )
