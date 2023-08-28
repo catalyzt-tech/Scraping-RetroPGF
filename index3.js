@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer'
-
+import fs from 'fs'
 const browser = await puppeteer.launch({
   headless: false,
   defaultViewport: null,
@@ -32,21 +32,38 @@ for (let each of linkArray) {
   const name = await eachpage.$eval('h1._header_bb8mr_1', (h1) =>
     h1 ? h1.textContent : 'Null'
   )
-  const about = await eachpage.$eval(
-    '._content_i25cn_54 > section:nth-child(4) > p',
-    (p) => (p ? p.innerText : 'Null')
+
+  const aboutElement = await eachpage.$(
+    '._content_i25cn_54 > section:nth-child(4) > p'
   )
-  const question_1 = await eachpage.$eval(
-    '._content_i25cn_54 > section:nth-child(6) > p:nth-child(3)',
-    (p) => (p ? p.innerText : 'Null')
+  const about = aboutElement
+    ? await aboutElement.evaluate((p) => p.innerText)
+    : 'Null'
+
+  const question_1Element = await eachpage.$(
+    '._content_i25cn_54 > section:nth-child(6) > p:nth-child(3)'
   )
-  const question_2 = await eachpage.$eval(
-    '._content_i25cn_54 > section:nth-child(7) > p:nth-child(3)',
-    (p) => (p ? p.innerText : 'Null')
+  const question_1 = question_1Element
+    ? await question_1Element.evaluate((p) => p.innerText)
+    : 'Null'
+
+  const question_2Element = await eachpage.$(
+    '._content_i25cn_54 > section:nth-child(7) > p:nth-child(3)'
   )
-  const team = await eachpage.$eval(
-    '._content_i25cn_54 > section:nth-child(8) > p:nth-child(2)',
-    (p) => (p ? p.innerText : 'Null')
+  const question_2 = question_2Element
+    ? await question_2Element.evaluate((p) => p.innerText)
+    : 'Null'
+
+  const teamElement = await eachpage.$(
+    '._content_i25cn_54 > section:nth-child(8) > p:nth-child(2)'
+  )
+  const team = teamElement
+    ? await teamElement.evaluate((p) => p.innerText)
+    : 'Null'
+  await fs.mkdirSync(`each_project/${name}`, { recursive: true })
+  await fs.writeFileSync(
+    `each_project/${name}/info.json`,
+    JSON.stringify({ name, about, question_1, question_2, team })
   )
   await temp.push({ name, about, question_1, question_2, team })
   await console.log(temp)
