@@ -27,12 +27,40 @@ let temp = []
 for (let each of linkArray) {
   const eachpage = await browser.newPage()
   await eachpage.goto(each)
-  // await eachpage.waitForSelector('._header_bb8mr_1', { timeout: 5000 })
   await eachpage.waitForTimeout(5000)
+  const icon64 = await eachpage.$eval('._image_bb8mr_10', (img) => img.src)
+  const icon = Buffer.from(icon64.slice(22), 'base64')
+  let banner64, banner
+  try {
+    banner64 = await eachpage.$eval('._banner_i25cn_46 > img', (img) => img.src)
+    banner = Buffer.from(banner64.slice(22), 'base64')
+  } catch (err) {
+    banner = null
+  }
   const name = await eachpage.$eval('h1._header_bb8mr_1', (h1) =>
     h1 ? h1.textContent : 'Null'
   )
+  const twitterElement = await eachpage.$(
+    'div._container_1gcg6_1 > a:nth-child(1)'
+  )
+  const twitter = twitterElement
+    ? await twitterElement.evaluate((a) => a.href)
+    : 'Null'
 
+  const githubElement = await eachpage.$(
+    'div._container_1gcg6_1 > a:nth-child(2)'
+  )
+  const github = githubElement
+    ? await githubElement.evaluate((a) => a.href)
+    : 'Null'
+
+  const websiteElement = await eachpage.$(
+    'div._container_1gcg6_1 > a:nth-child(3)'
+  )
+
+  const website = websiteElement
+    ? await websiteElement.evaluate((a) => a.href)
+    : 'Null'
   const aboutElement = await eachpage.$(
     '._content_i25cn_54 > section:nth-child(4) > p'
   )
@@ -63,9 +91,31 @@ for (let each of linkArray) {
   await fs.mkdirSync(`each_project/${name}`, { recursive: true })
   await fs.writeFileSync(
     `each_project/${name}/info.json`,
-    JSON.stringify({ name, about, question_1, question_2, team })
+    JSON.stringify({
+      name,
+      twitter,
+      github,
+      website,
+      about,
+      question_1,
+      question_2,
+      team,
+    })
   )
-  await temp.push({ name, about, question_1, question_2, team })
+  await fs.writeFileSync(`each_project/${name}/icon.jpg`, icon, 'binary')
+  if (banner) {
+    await fs.writeFileSync(`each_project/${name}/banner.jpg`, banner, 'binary')
+  }
+  await temp.push({
+    name,
+    twitter,
+    github,
+    website,
+    about,
+    question_1,
+    question_2,
+    team,
+  })
   await console.log(temp)
   await eachpage.close()
 }
