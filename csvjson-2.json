@@ -1,0 +1,310 @@
+[
+  {
+    "name": "Ethersjs",
+    "allocation": "$51,345"
+  },
+  {
+    "name": "go-ethereum",
+    "allocation": "$45,232"
+  },
+  {
+    "name": "EthGlobal",
+    "allocation": "$42,787"
+  },
+  {
+    "name": "Hardhat",
+    "allocation": "$41,565"
+  },
+  {
+    "name": "WalletConnect",
+    "allocation": "$40,342"
+  },
+  {
+    "name": "Solidity",
+    "allocation": "$40,342"
+  },
+  {
+    "name": "Goerli",
+    "allocation": "$35,452"
+  },
+  {
+    "name": "Erigon",
+    "allocation": "$34,230"
+  },
+  {
+    "name": "Hive",
+    "allocation": "$31,785"
+  },
+  {
+    "name": "DappTools",
+    "allocation": "$30,562"
+  },
+  {
+    "name": "BuidlGuidl",
+    "allocation": "$28,117"
+  },
+  {
+    "name": "solidity-coverage",
+    "allocation": "$24,450"
+  },
+  {
+    "name": "Kovan",
+    "allocation": "$24,450"
+  },
+  {
+    "name": "Etherscan",
+    "allocation": "$24,450"
+  },
+  {
+    "name": "Giveth",
+    "allocation": "$24,450"
+  },
+  {
+    "name": "blst - BLS12-381 Signatures (Supranational library)",
+    "allocation": "$23,227"
+  },
+  {
+    "name": "CryptoFees.info",
+    "allocation": "$22,005"
+  },
+  {
+    "name": "Rotki",
+    "allocation": "$22,005"
+  },
+  {
+    "name": "Proof of Humanity",
+    "allocation": "$22,005"
+  },
+  {
+    "name": "Ipsilon",
+    "allocation": "$20,782"
+  },
+  {
+    "name": "Prettier solidity (library for IDEs)",
+    "allocation": "$20,782"
+  },
+  {
+    "name": "js-ethereum-cryptography (JS library)",
+    "allocation": "$19,560"
+  },
+  {
+    "name": "Frame",
+    "allocation": "$18,337"
+  },
+  {
+    "name": "OVM security research",
+    "allocation": "$17,115"
+  },
+  {
+    "name": "hardhat-deploy",
+    "allocation": "$17,115"
+  },
+  {
+    "name": "L2BEAT",
+    "allocation": "$15,892"
+  },
+  {
+    "name": "EthStaker",
+    "allocation": "$15,892"
+  },
+  {
+    "name": "gas-reporter",
+    "allocation": "$14,670"
+  },
+  {
+    "name": "EthernautDAO",
+    "allocation": "$14,670"
+  },
+  {
+    "name": "TypeChain",
+    "allocation": "$14,670"
+  },
+  {
+    "name": "GSN",
+    "allocation": "$13,447"
+  },
+  {
+    "name": "OpenEthereum",
+    "allocation": "$13,447"
+  },
+  {
+    "name": "Brownie.Eth",
+    "allocation": "$13,447"
+  },
+  {
+    "name": "TrueBlocks",
+    "allocation": "$12,225"
+  },
+  {
+    "name": "EIP1559",
+    "allocation": "$12,225"
+  },
+  {
+    "name": "BrightID",
+    "allocation": "$11,002"
+  },
+  {
+    "name": "Codechecks",
+    "allocation": "$11,002"
+  },
+  {
+    "name": "DAppNode",
+    "allocation": "$9,780"
+  },
+  {
+    "name": "Otterscan",
+    "allocation": "$8,557"
+  },
+  {
+    "name": "Danny Ryan",
+    "allocation": "$8,557"
+  },
+  {
+    "name": "DeFi Llama",
+    "allocation": "$7,335"
+  },
+  {
+    "name": "Web3-react",
+    "allocation": "$7,335"
+  },
+  {
+    "name": "optimismPBR (Public Benefit Robot)",
+    "allocation": "$7,335"
+  },
+  {
+    "name": "LeapDAO",
+    "allocation": "$7,335"
+  },
+  {
+    "name": "Kotal",
+    "allocation": "$6,112"
+  },
+  {
+    "name": "Wildcards",
+    "allocation": "$6,112"
+  },
+  {
+    "name": "Watch The Burn",
+    "allocation": "$4,890"
+  },
+  {
+    "name": "C4",
+    "allocation": "$4,890"
+  },
+  {
+    "name": "Code423n4",
+    "allocation": "$4,890"
+  },
+  {
+    "name": "Sourcecred",
+    "allocation": "$4,890"
+  },
+  {
+    "name": "Crate Crypto",
+    "allocation": "$4,890"
+  },
+  {
+    "name": "Cannon",
+    "allocation": "$4,890"
+  },
+  {
+    "name": "Bankless",
+    "allocation": "$3,667"
+  },
+  {
+    "name": "Proto is a machine",
+    "allocation": "$3,667"
+  },
+  {
+    "name": "Token Engineering Commons",
+    "allocation": "$3,667"
+  },
+  {
+    "name": "Revoke.cash",
+    "allocation": "$3,667"
+  },
+  {
+    "name": "Mutual Aid Monday",
+    "allocation": "$1,222"
+  },
+  {
+    "name": "Blockchain Education Network (BEN)",
+    "allocation": "$1,222"
+  },
+  {
+    "name": "Synthetix",
+    "allocation": "-"
+  },
+  {
+    "name": "Chainlink",
+    "allocation": "-"
+  },
+  {
+    "name": "ENVELOP",
+    "allocation": "-"
+  },
+  {
+    "name": "GoatNFT",
+    "allocation": "-"
+  },
+  {
+    "name": "Popcorn",
+    "allocation": "-"
+  },
+  {
+    "name": "unblock",
+    "allocation": "-"
+  },
+  {
+    "name": "MILLION",
+    "allocation": "-"
+  },
+  {
+    "name": "Lyra Finance",
+    "allocation": "-"
+  },
+  {
+    "name": "WePiggy",
+    "allocation": "-"
+  },
+  {
+    "name": "MetaFinance",
+    "allocation": "-"
+  },
+  {
+    "name": "Arken Finance",
+    "allocation": "-"
+  },
+  {
+    "name": "XFolio",
+    "allocation": "-"
+  },
+  {
+    "name": "elimu.ai Community",
+    "allocation": "-"
+  },
+  {
+    "name": "SharedTools",
+    "allocation": "-"
+  },
+  {
+    "name": "Harmony Protocol",
+    "allocation": "-"
+  },
+  {
+    "name": "Amy Finance",
+    "allocation": "-"
+  },
+  {
+    "name": "Spell",
+    "allocation": "-"
+  },
+  {
+    "name": "Khabenskiy Fund",
+    "allocation": "-"
+  },
+  {
+    "name": "Total",
+    "allocation": "$1,000,000"
+  }
+]
