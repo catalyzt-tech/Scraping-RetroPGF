@@ -60,7 +60,7 @@
     "allocation": "$24,450"
   },
   {
-    "name": "blst - BLS12-381 Signatures (Supranational library)",
+    "name": "blst - BLS12-381 Signatures",
     "allocation": "$23,227"
   },
   {
@@ -80,11 +80,11 @@
     "allocation": "$20,782"
   },
   {
-    "name": "Prettier solidity (library for IDEs)",
+    "name": "Prettier solidity",
     "allocation": "$20,782"
   },
   {
-    "name": "js-ethereum-cryptography (JS library)",
+    "name": "js-ethereum-cryptography",
     "allocation": "$19,560"
   },
   {
@@ -284,7 +284,7 @@
     "allocation": "-"
   },
   {
-    "name": "SharedTools",
+    "name": "Shared Tools",
     "allocation": "-"
   },
   {
@@ -302,9 +302,5 @@
   {
     "name": "Khabenskiy Fund",
     "allocation": "-"
-  },
-  {
-    "name": "Total",
-    "allocation": "$1,000,000"
   }
 ]
