@@ -5,6 +5,7 @@ const browser = await puppeteer.launch({
   defaultViewport: null,
 })
 
+<<<<<<< HEAD
 const page = await browser.newPage()
 await page.goto('https://app.optimism.io/retropgf-discovery')
 await page.waitForSelector('._primaryButton_7jap0_6')
@@ -15,6 +16,35 @@ while (true) {
     await page.waitForSelector('._primaryButton_7jap0_6', { timeout: 10000 })
   } catch (error) {
     break
+=======
+try {
+  const page = await browser.newPage()
+  await page.goto(
+    'https://app.optimism.io/retropgf-discovery/0xB30dD1198Feed1e22EC969f61EEd04cB75937adf'
+  )
+  await page.waitForTimeout(20000)
+  let temp = []
+  const scrap = async () => {
+    const name = await page.$eval('h1._header_bb8mr_1', (h1) => h1.textContent)
+    const about = await page.$eval(
+      '._content_i25cn_54 > section:nth-child(4) >p',
+      (p) => p.innerText
+    )
+    const question_1 = await page.$eval(
+      '._content_i25cn_54 > section:nth-child(6)>p:nth-child(3)',
+      (p) => p.innerText
+    )
+    const question_2 = await page.$eval(
+      '._content_i25cn_54 > section:nth-child(7)>p:nth-child(3)',
+      (p) => p.innerText
+    )
+    const team = await page.$eval(
+      '._content_i25cn_54 > section:nth-child(8)>p:nth-child(2)',
+      (p) => p.innerText
+    )
+    temp.push({ name, about, question_1, question_2, team })
+    console.log(temp)
+>>>>>>> feat: retropgf3 ballot script
   }
 }
 
