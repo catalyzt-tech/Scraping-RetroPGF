@@ -59,10 +59,17 @@ const fetchBallot = async () => {
 
       const newData = await rawData.json()
       const totalBallots = newData.data.retroPGF.project.includedInBallots
-
+      // const typeProjects = newData.data.retroPGF.project.applicantType
+      const totalLists = newData.data.retroPGF.project.lists.length
       // Create a new object with the existing data and the ballot count
       const { displayName, ...rest } = each
-      fetchData[i] = { ...rest, name: displayName, value: totalBallots }
+      fetchData[i] = {
+        ...rest,
+        name: displayName,
+        value: totalBallots,
+        // type: typeProjects,
+        lists: totalLists,
+      }
       // Log the updated data
       console.log(fetchData[i])
     } catch (err) {
@@ -80,22 +87,34 @@ const categoriesFilter = () => {
   const opStackData = fetchData
     .filter((each) => each['New Main-Category'] === 'OP_Stack')
     .map(
-      ({ 'Approval Attestation ID': x, 'New Main-Category': y, ...rest }) =>
-        rest
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        lists: z,
+        ...rest
+      }) => rest
     )
 
   const collectiveGovernanceData = fetchData
     .filter((each) => each['New Main-Category'] === 'Collective_Governance')
     .map(
-      ({ 'Approval Attestation ID': x, 'New Main-Category': y, ...rest }) =>
-        rest
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        lists: z,
+        ...rest
+      }) => rest
     )
 
   const developerEcosystemData = fetchData
     .filter((each) => each['New Main-Category'] === 'Developer_Ecosystem')
     .map(
-      ({ 'Approval Attestation ID': x, 'New Main-Category': y, ...rest }) =>
-        rest
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        lists: z,
+        ...rest
+      }) => rest
     )
 
   const endUserExperienceAdoptionData = fetchData
@@ -103,8 +122,12 @@ const categoriesFilter = () => {
       (each) => each['New Main-Category'] === 'End_User_Experience_Adoption'
     )
     .map(
-      ({ 'Approval Attestation ID': x, 'New Main-Category': y, ...rest }) =>
-        rest
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        lists: z,
+        ...rest
+      }) => rest
     )
 
   fs.writeFileSync('opStackData.json', JSON.stringify(opStackData))
@@ -122,9 +145,72 @@ const categoriesFilter = () => {
   )
 }
 
+const listFilter = () => {
+  const listOpStackData = fetchData
+    .filter((each) => each['New Main-Category'] === 'OP_Stack')
+    .map(
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        value: z,
+        ...rest
+      }) => rest
+    )
+
+  const listCollectiveGovernanceData = fetchData
+    .filter((each) => each['New Main-Category'] === 'Collective_Governance')
+    .map(
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        value: z,
+        ...rest
+      }) => rest
+    )
+
+  const listDeveloperEcosystemData = fetchData
+    .filter((each) => each['New Main-Category'] === 'Developer_Ecosystem')
+    .map(
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        value: z,
+        ...rest
+      }) => rest
+    )
+
+  const listEndUserExperienceAdoptionData = fetchData
+    .filter(
+      (each) => each['New Main-Category'] === 'End_User_Experience_Adoption'
+    )
+    .map(
+      ({
+        'Approval Attestation ID': x,
+        'New Main-Category': y,
+        value: z,
+        ...rest
+      }) => rest
+    )
+
+  fs.writeFileSync('listOpStackData.json', JSON.stringify(listOpStackData))
+  fs.writeFileSync(
+    'listCollectiveGovernanceData.json',
+    JSON.stringify(listCollectiveGovernanceData)
+  )
+  fs.writeFileSync(
+    'listDeveloperEcosystemData.json',
+    JSON.stringify(listDeveloperEcosystemData)
+  )
+  fs.writeFileSync(
+    'listEndUserExperienceAdoptionData.json',
+    JSON.stringify(listEndUserExperienceAdoptionData)
+  )
+}
+
 const wait = async () => {
   await fetchBallot()
   await categoriesFilter()
+  await listFilter()
 }
 
 wait()
