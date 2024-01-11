@@ -32,4 +32,6 @@ const test = async () => {
     console.log(obj)
   })
 }
-document.addEventListener('DOMContentLoaded', test)
+
+test()
+// document.addEventListener('DOMContentLoaded', test)

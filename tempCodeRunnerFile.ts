@@ -1,0 +1,1 @@
+    fetchDataNew = fetchData
