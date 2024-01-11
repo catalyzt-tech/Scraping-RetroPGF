@@ -34,7 +34,7 @@ const fetchSheet = async () => {
 
 const resultData = async () => {
   for (let each of fetchDataNew) {
-    for (let each2 of result) {
+    for (let [index, each2] of result.entries()) {
       console.log(each['Approval Attestation ID'], each2['project_id'])
       if (each['Approval Attestation ID'] === each2['project_id']) {
         const { votes_count, median_amount, scaled_amount, ...left } = each2
@@ -43,6 +43,7 @@ const resultData = async () => {
           ballot: votes_count,
           median: median_amount,
           scaled: scaled_amount,
+          rank: index + 1,
         }
         finalData.push(newObj)
       }
@@ -55,6 +56,7 @@ const resultData = async () => {
 const mergeData = async () => {
   await fetchSheet()
   await resultData()
+  finalData.sort((a, b) => a['scaled'] - b['scaled'])
 }
 
 mergeData()
