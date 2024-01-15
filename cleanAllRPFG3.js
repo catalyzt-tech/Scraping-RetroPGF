@@ -18,6 +18,7 @@ for (let [index, value] of dataInelgiblerpgf3.entries()) {
     address: newAddress2,
     statusReview: 'remove',
     statusRPGF3: 'ineligible',
+    'New Main-Category': null,
     ballot: null,
     median: null,
     scaled: null,
@@ -31,7 +32,7 @@ for (let [index, value] of finalData1.entries()) {
   let duplicate = false
 
   for (let each of dataEligiblerpgf3) {
-    if (value['projectId'] === each['projectId']) {
+    if (value['displayName'] === each['displayName']) {
       duplicate = true
     }
   }
@@ -50,7 +51,8 @@ for (let [index, value] of finalData1.entries()) {
 }
 finalData2 = [...dataEligiblerpgf3, ...tempData]
 console.log(finalData1.length, finalData2.length)
-mergeData = [...finalData1, ...finalData2]
+mergeData = [...finalData2]
+console.log(mergeData.length)
 // function removeBackslashesAndNewlines(obj) {
 //   const result = {}
 
