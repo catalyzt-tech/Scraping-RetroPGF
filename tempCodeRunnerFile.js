@@ -1,1 +1,2 @@
-document.addEventListener('DOMContentLoaded', test)
+
+      (div) => div.innerHTML
